@@ -1,0 +1,23 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "halogen (morpheus)/halogen-qwen3.8-flash-next",
+  "providers": {
+    "halogen (morpheus)": {
+      "name": "halogen (morpheus)",
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "settings": {
+        "baseURL": "https://agentgateway.pseudoform.org/v1",
+        "apiKey": "agw_sk_L6tmZ1UtAnTgNmzUkig5xVmRJPneUgiC"
+      },
+      "models": {
+        "halogen-qwen3.8-flash-next": {
+          "name": "halogen-qwen3.8-flash-next",
+          "limit": {
+            "context": 262144,
+            "output": 65536
+          }
+        }
+      }
+    }
+  }
+}

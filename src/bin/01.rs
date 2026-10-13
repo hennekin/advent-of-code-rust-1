@@ -1,56 +1,55 @@
 advent_of_code::solution!(1);
 
 pub fn part_one(input: &str) -> Option<u64> {
-    struct LockWheel {
-        number: i32,
-        count: i32
-    }
-    impl LockWheel {
+    let mut position: i64 = 50;
+    let mut count: i64 = 0;
 
-        fn new() -> Self {
-            Self { number: 50, count: 0}
+    for line in input.lines() {
+        let line = line.trim();
+        if line.is_empty() {
+            continue;
+        }
+        let dir = line.chars().next().unwrap();
+        let distance: i64 = line[1..].parse().unwrap();
+
+        if dir == 'L' {
+            position = (position + 100 - distance) % 100;
+        } else {
+            position = (position + distance) % 100;
         }
 
-        pub fn turn_left(&mut self, value: i32) {
-            self.number = (self.number - value).rem_euclid(100);
-
-            if self.number == 0 {
-                self.count += 1;
-            }
-        }
-
-        pub fn turn_right(&mut self, value: i32) {
-            /*
-             * The dial has positions 0 through 99. `rem_euclid(100)` wraps
-             * values above 99 back to 0 and keeps the result non-negative,
-             * so values below 0 wrap around to 99.
-             */
-            self.number = (self.number + value).rem_euclid(100);
-
-            if self.number == 0 {
-                self.count += 1;
-            }
+        if position == 0 {
+            count += 1;
         }
     }
 
-    let mut wheel = LockWheel::new();
-
-    for line in input.lines().filter(|line| !line.is_empty()) {
-        let (direction, distance) = line.split_at(1);
-        let value = distance.parse::<i32>().ok()?;
-
-        match direction {
-            "L" => wheel.turn_left(value),
-            "R" => wheel.turn_right(value),
-            _ => return None,
-        }
-    }
-
-    Some(wheel.count as u64)
+    Some(count as u64)
 }
 
-pub fn part_two(input: &str) -> Option<u64> {
-    None
+pub fn part_two(_input: &str) -> Option<u64> {
+    let mut position: i64 = 50;
+    let mut count: i64 = 0;
+
+    for line in input.lines() {
+        let line = line.trim();
+        if line.is_empty() {
+            continue;
+        }
+        let dir = line.chars().next().unwrap();
+        let distance: i64 = line[1..].parse().unwrap();
+
+        if dir == 'L' {
+            position = (position + 100 - distance) % 100;
+        } else {
+            position = (position + distance) % 100;
+        }
+
+        if position == 0 {
+            count += 1;
+        }
+    }
+
+    Some(count as u64)
 }
 
 #[cfg(test)]
